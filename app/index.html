@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- Web App Config -->
+    <title>Trango</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+    <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/mdb.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+
+<style>
+.information-icon #Bellnotifications.btn{
+	border:2px #fff solid;
+	color: #fff;
+    opacity: 1;
+	}
+</style>
+
+<style>
+	body.modal-open .modal{
+		overflow:hidden;
+		}
+	body.modal-open{
+		overflow:hidden;
+		}
+</style>
+</head>
+
+<body translate="no" class="view">
+
+	<div class="requestcall flex-center mask  rgba-black-strong" style="display:none">
+		<div class="receivercallcontent">
+		<p>Calling...</p>
+		<p class="encrpted"><i class="fas fa-lock"></i> Encrypted</p>
+		</div>
+        <button type="button" class="btn btn-secondary" onclick="sendCallStatus('ignore');"><i class="Phone is-animating rejected"></i></button>
+    </div>
+    <div class="receivecall flex-center mask  rgba-black-strong" style="display:none">
+  
+      <div class="receivercallcontent">
+      <p class="encrpted"> <i class="fas fa-lock"></i>  Encrypted</p>
+        <p><span id="callerCallType"></span> Call</p>
+        <div id="avatarview" class="text-center profile-card">
+          <div class="avatar z-depth-1-half mb-4">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg" class="rounded-circle" alt="First sample avatar image">
+                  </div>
+        </div>
+        <div id="callername"><div class="callingname"><span id="callerName"></span></div></div>
+      </div>
+              <button type="button" class="btn btn-secondary waves-effect waves-light" onclick="sendCallStatus('ignore');"><i class="Phone is-animating rejected"></i></button>
+              <button type="button" class="btn btn-primary waves-effect waves-light" onclick="sendCallStatus('accept');"><i class="Phone is-animating accepted"></i></button>
+      
+  
+      </div>
+    <header class="">
+       <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+            <div class="container-fluid"><h1><a class="navbar-brand" href="index.html">
+                    <img src="img/logo.png" alt="trango logo" class="img-fluid logo-trango">
+                </a></h1>
+                <ul class="navbar-nav nav-flex-icons information-icon navbar-right">
+                    <li class="nav-item">
+                        <a href="#" id="Bellnotifications" data-toggle="modal" data-target="#elegantModalForm" class="icon-button close  btn btn-primary btn-small btn-rounded" title="Information" >
+                           i
+                        </a>
+						
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+       
+    </header>
+	
+		<div id="about" class=" full center column"  style="display:none; padding: 20px;">
+			<section class="overlay-form center column fade-in " style="display:none;" >
+				<header class="row-reverse">
+                <a href="#" class="newclose close icon-button">
+                    <span aria-hidden="true">×</span>
+                </a>
+				</header>
+			
+				<div class="row w-100 text-center info-main">
+					<div class="col-md-7  text-center info-center m-auto">
+						
+						<p  class="info-i text-center">Trango is a concept and is currently in beta. We would love to hear your feedback as to what you like and what you would like to be added!</p>
+					</div>	
+					<div class="col-md-12 text-center  m-auto">
+						<button class="btn btn-primary waves-effect waves-light text-center" data-toggle="modal" data-target="#basicExampleModal">Leave Feedback</button>
+					</div>
+					
+					
+				</div>
+		
+				<div class="row mt-5">
+				
+					<div class="info-note  text-center w-100 pt-5">
+						<p><strong>Note:</strong> All iOS users, Please use the safari browser while using trango.</p>
+					</div>
+				
+					<div class="social-media-info">
+						<ul >
+							<li >
+								<a class="icon-button" target="_blank" href="https://www.facebook.com/trango.io/" title="Facebook" >
+								<img src="img/FB.png">
+								</a>
+							</li>
+							<li>
+								<a class="icon-button" target="_blank" href="https://twitter.com/trango_io/" title="Twitter" >
+								<img src="img/twitter_b.png">
+								</a>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+			
+			
+			</section>
+        <div class="overlayback" data-click-state="1" style="transform: scale(0);"></div>
+		
+    </div>
+	
+	
+	
+	
+    
+		<div class="sysicons align-self-center">
+			<ul id="peers">	
+			</ul>
+		</div>
+	<div id="signals">
+		<span class="signal s1"></span>
+		<span class="signal s2"></span>
+		<span class="signal s3"></span>
+		<span class="signal s4"></span>
+		<span class="signal s5"></span>
+		<span class="signal s6"></span>
+	  <span class="signal s7"></span>
+	  <span class="signal s8"></span>
+	  <span class="signal s9"></span>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="modal fade info-modal rounded" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      <div class="modal-body">
+        <div class="row " id="feedBackMessage">
+          <span></span>
+        </div>
+			<div class="row ">
+				<form id="contact-form" class="w-100 px-3" name="contact-form" action="mail.php" method="POST">
+
+                    <div class="col-md-12">
+
+                        <div class="">
+                           <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" maxlength="1000"></textarea>
+                            
+                        </div>
+						
+                    </div>
+					 <div class="col-md-12 my-3">
+						<div class="form-check text-left">
+						<input type="checkbox" class="form-check-input" name="updates" id="updates" value="1">
+						<label for="updates" class="form-check-label text-white">Subscribe</label>
+						</div>
+					</div>
+					  
+					<div class="" id="notifyEmail" style="display: none;">
+					 
+						  <div class="col-md-12"> 
+							  <div class=" mb-0 email-about">
+								  <input type="text" id="email" name="email" class="form-control">
+								  
+							  </div>
+						 </div>
+ 
+					</div>  
+					  
+					<div class="col-md-12 text-center text-md-left mt-3">
+						<a class="btn btn-primary waves-effect waves-light float-right" id="subscribe">Send</a>
+					</div>  
+					
+				</form>
+
+		
+					
+				<div class="status" id="status"></div>
+			</div>
+		
+		
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="sysicons-myPeer align-self-center bottom-myName" >
+  <ul id="myPeer">	
+    <li></li>
+  </ul>
+</div>
+	
+     <h5 class="bottom-intro text-center">Make audio and video calls or transfer data without going through the internet. <span>Users on the same network (LAN) with this page opened will be displayed here.</span></h5>
+   <div class="modal fade" id="downloadconfirm" tabindex="-1" data-backdrop="static" data-keyboard="false"  role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+    <div class="modal-dialog " role="document" >
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title w-100">File Received</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ignore</button>
+            <a id="download" role="button" class="btn btn-primary">Download</a>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="modal fade" id="filerequest" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+    <div class="modal-dialog " role="document" >
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title w-100">File Request</h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="sendStatus('ignore');">Ignore</button>
+            <button type="button" class="btn btn-primary" onclick="sendStatus('accept');" >Accept</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="modal fade" id="callrequest" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+    <div class="modal-dialog " role="document" >
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title w-100">Call Request</h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="sendCallStatus('ignore');"><i class="Phone is-animating rejected"></i></button>
+            <button type="button" class="btn btn-primary" onclick="sendCallStatus('accept');" ><i class="Phone is-animating accepted"></i></button>
+			
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="modal fade " id="callscreens" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+
+		<div class="modal-dialog modal-fluid" role="document" style="max-width:1200px" >
+			<div class="modal-content">
+				<div class="modal-body">
+				<div class="videortc  align-middle">
+					<div class="videortcframe" style="width:100%; height:100%">
+						<video id="remoteVideo" class="" playsinline autoplay style=" width: 100%!important; height: 90vh!important; border-style:solid; border-width: 4px; border-color: #353535;   background-size:contain;" ></video>
+						<audio id="remoteAudio" autoplay=""></audio>
+					
+					
+						<video class="z-depth-5" id="localVideo" playsinline autoplay muted  style=" height: auto; width: 20%; background-color:#dfdfdf; border-style: solid; border-width: 2px; border-color: #353535; position: absolute; right: 10px; bottom: 10%; z-index:1; object-fit: cover" ></video>
+					</div>
+					
+					
+					<div class="controls">
+					
+						<ul class="controls-icons">
+							<li><a id="hangupButton" onclick="hangUp()" data-toggle="tooltip" data-placement="top" title="Hangup">
+								<img src="img/hangup.png" class="img-fluid">
+                            </a></li>
+                            <li><a id="muteButton" onclick="toggleAudioMute()" data-toggle="tooltip" data-placement="top" title="Mute">
+								<i class="mic fa fa-microphone is-animating " ></i>
+                            </a></li>
+                            <li><a id="toggleVideo" onclick="toggleAudioVideo()" data-toggle="tooltip" data-placement="top" title="Camera On/Off">
+								<img src="img/cam-icon.png" class="img-fluid">
+							</a></li>
+						</ul>
+					
+					</div>
+				</div>
+					
+				</div>
+			</div>
+		</div>
+    </div>
+
+		
+	
+		
+	  <script src="js/faker.js"></script>
+    <script src="js/bundled.js"></script>
+    <script src="js/simplepeer.min.js"></script>
+    <script src="js/webrtcinit.js"></script>
+    <script src="js/main.js"></script>
+	
+    <script type="text/javascript" src="js/popper.min.js"></script>
+
+    <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+		
+		<script type="text/javascript" src="js/notifys.min.js"></script>
+		
+		
+		<script>
+      function setCookie(cname, cvalue, exdays) {
+          var d = new Date();
+          d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+          var expires = "expires=" + d.toGMTString();
+          document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
+      function checkCookie() {
+        var user = getCookie("cookies");
+
+        if (user != "") {
+          $('#sideModalTLInfo').modal('hide');
+        } else {
+          $('#sideModalTLInfo').modal('show');
+          $('#sideModalTLInfo .cookies-set').on('click', function () {
+            user = 'trangocache';
+            if (user != "" && user != null) {
+
+              setCookie("cookies", user, 3);
+            }
+          });
+        }
+      }
+      $(document).ready(function() {
+      
+        checkCookie();
+      });
+		</script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+        <script type="text/javascript">
+
+            new WOW().init();
+jQuery(document).ready(function($){
+	$('#about').hide();
+  $('body').on('click','#Bellnotifications, .newclose', function(event){
+	
+	event.preventDefault();	
+    if($('.overlayback').attr('data-click-state') == 1) {
+		$('#about').show();
+        $('.overlayback').attr('data-click-state', 0);
+        $('.overlayback').css('transform', 'scale(10)');
+		$('.overlay-form').delay(500).show(0);
+		
+      }
+    else {
+		
+      $('.overlayback').attr('data-click-state', 1);
+      $('.overlayback').css('transform', 'scale(0)');
+	  $('.overlay-form').delay(300).hide(0);
+    $('#about').delay(400).hide(0);
+    
+    }
+  });
+});
+
+$(document).ready(function() {
+
+    $('#updates').change(function() {
+        if(this.checked) {
+
+          $('#notifyEmail').show(0);
+        }else{
+          $('#notifyEmail').hide(0);
+        }    
+    });
+
+    $( "#subscribe" ).click(function() {
+     var messageFeild= $("#message").val() ;
+    if(messageFeild && messageFeild.length<2){
+      alert("Please enter more then 2 characters for message");
+return false;
+    }else{
+            var settings = {
+        url: "https://trango.io/api/EarlySignup/ContactUs",
+        method: "POST",
+        timeout: 0,
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        data: {
+          IPAddress: "192.168.0.1",
+	  Email: "info@trango.io",
+          Name: $("#email").val(),
+          Subject: "Feedback "+ $("#email").val(),
+          Message: $("#message").val() + "  <br/> <br/> <br/>   "+ $("#email").val()         
+        }
+      };
+
+      $("#message").val("");
+      $("#email").val("");
+
+      $("#nMessageBody p" ).replaceWith("<p>Thanks for your feedback!</p>");
+
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
+    $("#feedBackMessage span" ).replaceWith("<span class='padding-2'>Thanks for your feedback!</span>");
+    setTimeout(function() {    $("#feedBackMessage span" ).replaceWith("<span></span>");}, 10000);
+
+
+  }
+  });
+
+
+});
+        </script>		
+</body>
+</html>
