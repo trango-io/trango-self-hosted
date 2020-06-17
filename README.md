@@ -33,10 +33,24 @@ The Following are the steps for deployment.
   - ``` g++ main.cpp WebSocketMainWS.cpp WebSocketWS.cpp -I ../lib/SimpleWebSocketServer/ -lboost_system -lssl -lcrypto -lpthread -o WebSocketWS ```
   - ``` ./WebSocketWS &```
   
-#### Docker Deployment.
+#### Docker Deployment (Windows/Linux).
 Install docker on your machine and follow the following steps.
 - Download Trango Self-Hosted version docker image by executing below command.
-  - ```sudo docker pull mmurtaznaqvi/trango```
+  - ```sudo docker pull tak786/trango-self-hosted```
 - Run the Self-Hosted version by executing following command.
-  - ```sudo docker container run -d -p 80:80 -p 443:443 --name trango mmurtaznaqvi/trango```
+  - ```sudo docker container run -d -p 80:80 -p 443:443 --name trango tak786/trango-self-hosted```
 - Test it by accessing IP address of the machine running Self-Hosted version on your browser.
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Acknowledgements
+* [WebRTC](https://webrtc.org/)
+* [Simple-Peer](https://github.com/feross/simple-peer)
