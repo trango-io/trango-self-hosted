@@ -1,11 +1,13 @@
 ## Description
-Trango Self Hosted is a opensource file sharing and Audio/Video calling solution based on WebRTC. The pacakage comes with a discovery server and a web app which can be deployed on local machine and can be accessed from anywhere in the network.<br />
+Trango self-hosted is a calling and file sharing solution which works over LAN (local area networks). It does not need to involve the internet for calling or file sharing. Ideal for offices, hotels, houses, restaraunts and literally any space where people use the same Public IP address or the same WiFi network. The pacakage comes with a discovery server and a web app which can be deployed on local machine and can be accessed from anywhere in the network.<br />
+Trango Web can be visited at https://web.trango.io .
+
 The Following are the main features.
 - One to One Audio/Video Calling.
-- File Transfering.
+- File Transffering.
 - Ability to change auto genertated ID's.
 - No Internet Involved.
-- Secure.
+- Encrypted and Secure.
 - HD Calling quality.
 
 ## Deployment
