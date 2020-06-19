@@ -741,12 +741,14 @@ function AddImgSrc(devType) {
   var dType = devType.toLowerCase();
   if (dType == "android") {
     return "img/coming-soon/android.png";
-  } else if (dType == "windows" || dType == "linux") {
+  } else if (dType == "windows") {
     return "img/coming-soon/window.png";
   } else if (dType == "macos") {
     return "img/coming-soon/mac.png";
   } else if (dType == "ios") {
     return "img/coming-soon/ios.png";
+  } else if (dType == "linux") {
+    return "img/coming-soon/linux.png";
   } else {
     return null;
   }
