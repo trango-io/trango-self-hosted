@@ -1,7 +1,9 @@
 #include "WebSocketMainWS.h"
 
 unordered_map<string, PeerData*> WebSocketMainWS::peerMap;
+unordered_map<string, list<PeerData*>*> WebSocketMainWS::roomsMap;
 pthread_mutex_t WebSocketMainWS::peerMapLock = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t WebSocketMainWS::roomsMapLock = PTHREAD_MUTEX_INITIALIZER;
 
 void WebSocketMainWS::OnConnected(shared_ptr<WsServer::Connection> hConnection) {
     string email = hConnection->query_string;
@@ -40,6 +42,10 @@ void WebSocketMainWS::OnMessage(shared_ptr<WsServer::Connection> hConnection, st
                     if (!parsedMessage["to"].empty() && !parsedMessage["from"].empty()) {
                         RelayMessages(hConnection, parsedMessage);
                     }
+                } else if (parsedMessage["type"] == "joinroom") {
+                    JoinRoom(hConnection, parsedMessage["roomid"]);
+                } else if (parsedMessage["type"] == "partroom") {
+                    PartRoom(hConnection);
                 } else if (parsedMessage["type"] == "disconnect") {
                     if (!parsedMessage["email"].empty()) {
                         if (peerMap.find(parsedMessage["email"]) != peerMap.end()) {
@@ -59,10 +65,12 @@ void WebSocketMainWS::OnMessage(shared_ptr<WsServer::Connection> hConnection, st
 
 void WebSocketMainWS::OnDisconnected(shared_ptr<WsServer::Connection> hConnection) {
     string email = hConnection->query_string;
+    PartRoom(hConnection);
     DeletePeer(hConnection, email);
 }
 void WebSocketMainWS::OnError(shared_ptr<WsServer::Connection> hConnection, string sError) {
     string email = hConnection->query_string;
+    PartRoom(hConnection);
     DeletePeer(hConnection, email);
     cout << sError << endl;
 }
@@ -206,5 +214,124 @@ void WebSocketMainWS::SendPeersInfo(PeerData* pData, string type) {
             pDataMap->m_hConnection->send(info.dump());   
         }
     } 
+}
+
+void WebSocketMainWS::JoinRoom(shared_ptr<WsServer::Connection> hConnection, string roomID) {
+    string peerID = hConnection->query_string;
+
+    json resp = {
+            {"type", "responce"},
+            {"module", "joinroom"},
+            {"joined", false},
+            {"full", false}
+    };
+
+    json respJoin = {
+        {"type", "peerjoined"}
+    };
+
+    if (roomID.empty() || peerID.empty()) {
+        cout << "Peer ID or Room ID empty" << endl;
+        SendMessage(hConnection, resp.dump());
+        return;
+    }
+
+    if (roomsMap.find(roomID) != roomsMap.end()) {
+        if (peerMap.find(peerID) != peerMap.end()) {
+            PeerData* pData = peerMap[peerID];
+            if (pData->m_hConnection.get() == hConnection.get()) {
+                pthread_mutex_lock(&peerMapLock);
+                pthread_mutex_lock(&roomsMapLock); 
+                list<PeerData*>* roomList = roomsMap[roomID];
+                if (roomList->size() < 4) {
+                    pData->m_roomID = roomID;
+                    roomList->push_back(pData);
+                } else {
+                    resp["full"] = true;
+                    pthread_mutex_unlock(&roomsMapLock);
+                    pthread_mutex_unlock(&peerMapLock);
+                    SendMessage(hConnection, resp.dump());
+                    return;
+                }
+                pthread_mutex_unlock(&roomsMapLock);
+                pthread_mutex_unlock(&peerMapLock);
+                for (auto itr = roomList->begin(); itr != roomList->end(); itr++) {
+                    PeerData* data = *itr;
+                    if (data->m_hConnection.get() != hConnection.get()) {
+                        respJoin["peerid"] = peerID;
+                        respJoin["should_create_offer"] = false;
+                        SendMessage(data->m_hConnection, respJoin.dump());
+                        respJoin["peerid"] = data->m_email;
+                        respJoin["should_create_offer"] = true;
+                        SendMessage(hConnection, respJoin.dump()); 
+                    }
+                }
+            }
+        } else {
+            SendMessage(hConnection, resp.dump());
+        }
+    } else {
+        if (peerMap.find(peerID) != peerMap.end()) {
+        PeerData* pData = peerMap[peerID];
+        if (pData->m_hConnection.get() == hConnection.get()) { 
+            list<PeerData*>* roomList = new list<PeerData*>;
+            roomList->push_back(pData);
+            pthread_mutex_lock(&peerMapLock);
+            pthread_mutex_lock(&roomsMapLock);
+            pData->m_roomID = roomID;
+            roomsMap[roomID] = roomList;
+            pthread_mutex_unlock(&roomsMapLock);
+            pthread_mutex_unlock(&peerMapLock);
+            resp["joined"] = true;
+        }
+        SendMessage(hConnection, resp.dump());
+        } else {
+            SendMessage(hConnection, resp.dump());
+        }
+    }
+}
+
+
+void WebSocketMainWS::PartRoom(shared_ptr<WsServer::Connection> hConnection) {
+    string peerID = hConnection->query_string;
+
+    json respRemove = {
+        {"type", "peerparted"}
+    };
+    if (peerID.empty()) {
+        return;
+    }
+
+    if (peerMap.find(peerID) != peerMap.end()) {
+        PeerData* pData = peerMap[peerID];
+        if (pData->m_hConnection.get() == hConnection.get()) {
+            string roomID = pData->m_roomID;
+            if (!roomID.empty()) {
+                if (roomsMap.find(roomID) != roomsMap.end()) {
+                    list<PeerData*>* roomList = roomsMap[roomID];
+                    for (auto roomitr = roomList->begin(); roomitr != roomList->end(); roomitr++) { 
+                        PeerData* roomPData = *roomitr;
+                        if (roomPData->m_hConnection.get() == hConnection.get()) {
+                            if (pthread_mutex_lock(&roomsMapLock) != 0) {
+                                cout << "PeerPart: Unable to enquire lock" << endl;
+                                return;
+                            }
+                            roomitr = roomList->erase(roomitr);
+                            if (pthread_mutex_unlock(&roomsMapLock) != 0) {
+                                cout << "PeerPart: Unable to release lock" << endl;
+                                return;
+                            }
+                            break;
+                        }
+                    }
+                    if (roomList->empty()) {
+                        pthread_mutex_lock(&roomsMapLock);
+                        roomsMap.erase(roomID);
+                        pthread_mutex_unlock(&roomsMapLock);
+                    }
+                }
+            }
+            }
+    }
 }
 

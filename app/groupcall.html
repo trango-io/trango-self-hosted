@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Trango</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/groupcall.css">
+    <link rel="stylesheet" href="css/mdb.min.css">
+    <script src="js/adapter-latest.js"></script>
+    <script src="js/video.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/faker.js"></script>
+    <script src="js/simplepeer.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bundled.js"></script>
+    <script type="text/javascript" src="js/notifys.min.js"></script>
+
+  </head>
+  <body>
+    <div class="container-fluid">
+
+      <div id="remotes" class="row">
+        <div class="col border border-black">
+          <div class="videoContainer">
+            <video id="selfVideo" playinline autoplay oncontextmenu="return false;"></video>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+					
+        <ul class="controls-icons">
+          <li><a id="hangupButton" onclick="hangUp()" data-toggle="tooltip" data-placement="top" title="Hangup">
+            <img src="img/hangup.png" class="img-fluid">
+                        </a></li>
+                        <li><a id="muteButton" onclick="toggleAudioMute()" data-toggle="tooltip" data-placement="top" title="Mute">
+            <i class="mic fa fa-microphone is-animating " ></i>
+                        </a></li>
+                        <li><a id="toggleVideo" onclick="toggleAudioVideo()" data-toggle="tooltip" data-placement="top" title="Camera On/Off">
+            <img src="img/cam-icon.png" class="img-fluid">
+          </a></li>
+          <li>
+            <a id="copyurl" onclick="copyURL()" data-toggle="tooltip" data-placement="top" title="Copy Invitation URL">
+              <img src="img/plusUser.png" class="img-fluid">
+            </a>
+          </li>
+        </ul>
+      
+      </div>
+    </div>
+    <script>
+      handleLogin();
+    </script>
+  </body>
+</html>

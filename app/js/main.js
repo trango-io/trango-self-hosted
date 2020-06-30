@@ -18,7 +18,7 @@ var localStream;
 var remoteStream;
 
 var localVideo = document.getElementById("localVideo");
-localVideo.volume = 0;
+    localVideo.volume = 0;
 let remoteVideo = document.getElementById("remoteVideo");
 let audio = new Audio('media/ring.mp3');
 
@@ -42,11 +42,9 @@ let reconnectInterval = null;
 let fileStatus = false;
 let callStatus = false;
 
-let config = {"iceServers":[]};
-
 function fileUpload(li) {
   if (isStarted == true) {
-    $.notify("A Session is already in progress", { position:"top center",className: 'warning'});
+    alert("A Session is already in progress");
     return;
   }
   to = $(li).parent().parent().attr('id');
@@ -104,7 +102,7 @@ function setLocalStream() {
 async function createConnectionSender() {
   localConnection = null;
 
-  localConnection = new SimplePeer({ initiator: true, objectMode: true, config: config});
+  localConnection = new SimplePeer({ initiator: true, objectMode: true});
 
   localConnection.on('signal', data => {
     delete data.to;
@@ -153,6 +151,7 @@ async function createConnectionSender() {
           calltype: "video",
           from:from
         };
+        // $("#messageNotification").modal('hide');
         localConnection.send(JSON.stringify(resp));
 
         var constraints='';
@@ -189,9 +188,11 @@ async function createConnectionSender() {
       } else if (sData.type == "callaccept") {
         if (sData.message == "accept") {
           interval = setInterval(setLocalStream, 50);
+          // localConnection.addStream(localStream);
           $("#callscreens").modal('show');
           $("#callscreens").modal('show');
           $('.requestcall').hide(0);
+          //pause audio ring tune
           audio.pause(); audio.currentTime = 0;
         } else if (sData.message === "deviceNotFound"){
 		        $.notify("Receiver does not have a Mic/Camera", { position:"top center",className: 'info'});
@@ -238,7 +239,7 @@ async function createConnectionSender() {
 async function createConnectionReceiver() {
   localConnection = null;
 
-  localConnection = new SimplePeer({ objectMode: true, config: config});
+  localConnection = new SimplePeer({ objectMode: true});
 
   localConnection.on('signal', data => {
     delete data.to;
@@ -406,16 +407,20 @@ function closeDataChannels() {
   gotLocalStream = false;
   fileInput = null;
   var checkRequest =false;
+  //closing call request model in case if caller cancel the call before reciver accept it
+  //checkRequest =  $("#callrequest").attr('aria-modal');
+ // if(checkRequest){
   audio.pause(); audio.currentTime = 0;
 
-  $('.receivecall').hide(0);
-  $('.requestcall').hide(0);
-  //pause or stope audio riing tune
-  $('#toggleVideo img').attr("src", "img/cam-icon.png");
-  $('#muteButton i').addClass("fa-microphone");
-  $('#muteButton i').addClass("mic");
-  $('#muteButton i').removeClass("fa-microphone-slash");
-  $('#muteButton i').removeClass("mic-mute");
+       $('.receivecall').hide(0);
+       $('.requestcall').hide(0);
+       //pause or stope audio riing tune
+       $('#toggleVideo img').attr("src", "img/cam-icon.png");
+       $('#muteButton i').addClass("fa-microphone");
+       $('#muteButton i').addClass("mic");
+       $('#muteButton i').removeClass("fa-microphone-slash");
+       $('#muteButton i').removeClass("mic-mute");
+ // }
 }
 
 function isJSON(str) {
@@ -466,6 +471,7 @@ function onReceiveMessage(data) {
         $('#filerequest').modal('show');
         return;
       } else if (pData.type === "callrequest") {
+        
         if (pData.calltype == "audio") {
             callType = "audio";
             var spancallerCallType = document.createElement('span');
@@ -482,9 +488,11 @@ function onReceiveMessage(data) {
             spancallerName.textContent = dataName;
             $("#callerName").replaceWith(spancallerName);
             $('.receivecall').show(0);
+            //audio.muted = true;
             audio.volume = 1;
             audio.loop= true;
             audio.play();
+            // disable caller tune after 20 seconds
             setTimeout(function() {audio.pause(); audio.currentTime = 0;}, 20000);
 
         } else {
@@ -502,11 +510,12 @@ function onReceiveMessage(data) {
             spancallerName.textContent = dataName;
             $("#callerName").replaceWith(spancallerName);
             $('.receivecall').show(0);
+            //audio.muted = true;
             audio.volume = 1;
             audio.loop= true;
-            audio.play();
-            // disable audio call after 20 second 
-            setTimeout(function() {audio.pause(); audio.currentTime = 0;}, 20000);
+              audio.play();
+              // disable audio call after 20 second 
+              setTimeout(function() {audio.pause(); audio.currentTime = 0;}, 20000);
         }
       }  else if (pData.type === "calldecline") {
         if (pData.message == "decline") {
@@ -537,6 +546,7 @@ function sendStatus(status) {
     };
     localConnection.send(JSON.stringify(resp));
     initProgressBar();
+	
   }
   $('#filerequest').modal('hide');
 }
@@ -564,7 +574,7 @@ function gotMedia(stream) {
   };
   localConnection.send(JSON.stringify(resp));
     // show call popup(modal) in case of accpt receiver
-  $("#callscreens").modal('show');
+    $("#callscreens").modal('show');
 
   } else {
     gotLocalStream = true;
@@ -607,6 +617,7 @@ function sendCallStatus(status) {
    // var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     // check if call is audio or video 
     if (callType == "audio") {
+
       constraints = {video: {width: { min: 320,max: 1280},height: {min: 240,max: 720}}, audio: { echoCancellation: true }
     };
     }else if (callType=="video"){
@@ -669,15 +680,18 @@ var initCall= debounce((calltype)=> {
     initCallFunction(); 
     callType = "video";
   }
+  //$("#callContraoll").modal('show');
   $(".requestcall").show(0);
 
   audio.loop= true;
+  //audio.muted = true;
   audio.volume = .1;
 
-  audio.play();
-  //stop call ringer after 20 seconds
-  setTimeout(function() {audio.pause(); audio.currentTime = 0;}, 20000);
+    audio.play();
+    //stope call ringer after 20 seconds
+    setTimeout(function() {audio.pause(); audio.currentTime = 0;}, 20000);
 
+  //alert('callControlls');
 
  }, 250); 
 
@@ -753,6 +767,7 @@ function AddImgSrc(devType) {
     return null;
   }
 }
+
 $('#peers').on('click','li',function(evt){
   to = this.id || null;
 })
@@ -780,6 +795,7 @@ window.onclose = function(){
 
 document.onload = function() {
   if (SimplePeer.WEBRTC_SUPPORT) {
+    // $.notify.defaults({globalPosition: 'top center'})
     initWebSocket();
   } else {
     $.notify("Browser is not Compatible", {position:"top center",className: 'error'});
@@ -789,6 +805,7 @@ document.onload = function() {
 
 window.onload = function() {
   if (SimplePeer.WEBRTC_SUPPORT) {
+    // $.notify.defaults({globalPosition: 'top center'})
     initWebSocket();
   } else {
     $.notify("Browser is not Compatible", { position:"top center",className: 'error'});
@@ -796,28 +813,13 @@ window.onload = function() {
 }
 
 
-function loginValidate(){
-  var username = $("#usernameModal").val();
-  var password = $("#passwordModal").val();
-  if(username === "admin" && password === "dev@Trango123"){
-      $("#modalLoginForm").modal('hide');
-      setCookie("username", username);
-      setCookie("password", password);
-      setCookie("logedIn", "true");
-
-
-  }else{
-    document.cookie = "logedIn=false";
-  }
-
-}
-
 //SET Cookie 
 function setCookie(cname, cvalue) {
   let d = new Date();
   d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
   let expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  console.log(document.cookie);
 }
 // Filter Specific Cookies if exist 
 function getCookie(cname) {
@@ -852,10 +854,11 @@ function setMyName(e) {
 }
 function setMyNameEvent(e) {
 
-  var person = e.value;
+  var person = e.value;  //prompt("Please enter your name:", "");
   if (person && person !== "") {
     setCookie("myNameRTC", e.value);
     var myNameRTC = getCookie('myNameRTC');
+    console.log('isLogedIn', myNameRTC);
     if (ws != null) {
       from = null;
       ws.close(4005);
@@ -874,13 +877,11 @@ function setMyNameEvent(e) {
 }
 
 window.addEventListener("offline", function(e) {
-  console.log("offline");
   $("#peers").empty();
   ws.close();
 });
 
 window.addEventListener("online", function(e) {
-  console.log("online");
   $("#peers").empty();
   ws.close();
 });
