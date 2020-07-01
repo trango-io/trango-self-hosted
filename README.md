@@ -3,7 +3,7 @@ Trango self-hosted is a calling and file sharing solution that works over LAN (l
 Trango Web can be visited at https://web.trango.io . Please note that Trango is in beta.
 
 The Following are the main features.
-- One to One Audio/Video Calling.
+- One to One and Group Audio/Video Calling.
 - File Transferring.
 - Ability to change auto-generated ID's.
 - No Internet Involved.
