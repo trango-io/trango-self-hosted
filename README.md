@@ -1,7 +1,7 @@
 ## Description
 Trango self-hosted is a calling and file sharing solution that works over LAN (local area networks). It does not need to involve the internet for calling or file sharing. Ideal for offices, hotels, houses, restaurants, and any space where people use the same Public IP address or the same WiFi network. The package comes with a discovery server and a web app which can be deployed on the local machine and can be accessed from anywhere in the network.<br />
 Trango Web can be visited at https://web.trango.io . Please note that Trango is in beta. <br />
-**Note** Opensource selfhosted version is not compalible with Mobile and Desktop Apps.
+**Note** Opensource selfhosted version is not compatible with Mobile and Desktop Apps.
 
 The Following are the main features.
 - One to One and Group Audio/Video Calling.
