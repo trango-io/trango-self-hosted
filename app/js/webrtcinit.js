@@ -22,7 +22,6 @@ function initWebSocket() {
 
   ws = new WebSocket("wss://" + window.location.host +"/server/?"+ from);
   var li = document.createElement('li');
-  //li.setAttribute("id", device.email);
   li.classList.add("dropdown");
   li.classList.add("text-center");
   li.classList.add("progress-bar-icon");
@@ -34,8 +33,6 @@ function initWebSocket() {
   img.classList.add("mx-auto");
   img.classList.add("d-block");
 
-  // ahref.setAttribute("onclick","setMyName(this)");
-  // ahref.setAttribute("id","setMyName");
   var imgSrc = AddImgSrc(result.parsedResult.os.name);
   if (imgSrc !== null) {
     img.setAttribute("src", imgSrc);
@@ -131,6 +128,13 @@ function initWebSocket() {
       if (message.status == "busy") {
         $.notify("User is Busy", { position: "top center", className: 'info' });
         closeDataChannels();
+      }
+    } else if (message.type == "ping") {
+      if (message.peerid) {
+        sendMessage({
+          type : "pong",
+          peerid: message.peerid
+        });
       }
     }
   }

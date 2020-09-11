@@ -41,5 +41,6 @@ class WebSocketMainWS : public WebSocketWS {
         void OnMessage(shared_ptr<WsServer::Connection> hConnection, string sMessage);
         void OnDisconnected(shared_ptr<WsServer::Connection> hConnection);
         void OnError(shared_ptr<WsServer::Connection> hConnection, string sError);
+        void NetworkDetection();
 };
 

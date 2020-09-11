@@ -112,6 +112,13 @@ function initWebSocket() {
         isStarted = true;
         createConnection(message.peerid, message.should_create_offer);
       }
+    } else if (message.type == "ping") {
+      if (message.peerid) {
+        sendMessage({
+          type : "pong",
+          peerid: message.peerid
+        });
+      }
     }
   }
 }

@@ -53,6 +53,16 @@ void WebSocketMainWS::OnMessage(shared_ptr<WsServer::Connection> hConnection, st
                             OnDisconnected(pData->m_hConnection); 
                         }
                     }
+                } else if (parsedMessage["type"] == "pong") {
+                    string peerid = parsedMessage["peerid"].get<string>();
+                    pthread_mutex_lock(&peerMapLock);
+                    if (peerMap.find(peerid) != peerMap.end()) {
+                        PeerData* pData = peerMap[peerid];
+                        if (hConnection.get() == pData->m_hConnection.get()) {
+                            pData->m_isAlive = true;
+                        }
+                    }
+                    pthread_mutex_unlock(&peerMapLock);
                 }
             }
 
@@ -140,7 +150,7 @@ void WebSocketMainWS::DeletePeer(shared_ptr<WsServer::Connection> hConnection, s
                 return;
             }
             SendPeersInfo(peerMap[email], "delpeer");
-            delete peerMap[email];
+            // delete peerMap[email];
             peerMap.erase(email);
             if (pthread_mutex_unlock(&peerMapLock) != 0) {
                 cout << "DeletePeer: Unable to release lock" << endl;
@@ -335,3 +345,19 @@ void WebSocketMainWS::PartRoom(shared_ptr<WsServer::Connection> hConnection) {
     }
 }
 
+void WebSocketMainWS::NetworkDetection() {
+    unordered_map<string, PeerData*>::iterator itr = peerMap.begin();
+    while (itr != peerMap.end()) 
+    { 
+        string email = itr->first;
+        PeerData* pData = itr->second;
+        if (pData->m_isAlive ==  false) {
+            OnDisconnected(pData->m_hConnection); 
+        } else {
+            pthread_mutex_lock(&peerMapLock); 
+            pData->m_isAlive = false;
+            pthread_mutex_unlock(&peerMapLock); 
+            itr++;    
+        }  
+    }
+}

@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-RUN apt update && apt install -y libboost-all-dev && apt -y install libssl-dev && apt -y install g++ && apt -y install nginx && apt clean && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y libboost-all-dev && apt -y install libssl-dev && apt -y install g++ && apt -y install nginx python3.6 python3-pip && apt clean && rm -rf /var/lib/apt/lists/*
 
 COPY discoveryserver/ /home/discoveryserver/
 
