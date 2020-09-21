@@ -20,7 +20,7 @@ The package can be deployed on a Linux machine also to provide more robust suppo
 - ``` pip3 install flask_restful flask_cors psutil```
 #### RHEL Prerequisites
 - ``` sudo yum -y update && sudo yum install -y boost boost-devel boost-system boost-filesystem boost-thread openssl-devel gcc-c++ nginx python3.6 python3-pip curl``` <br />
-- `` curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh && bash nodesource_setup.sh && yum install -y nodejs``` <br />
+- ``` curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh && bash nodesource_setup.sh && yum install -y nodejs``` <br />
 - ``` pip3 install flask_restful flask_cors psutil```
 #### Deployment
 The Following are the steps for deployment.
