@@ -29,7 +29,7 @@ The Following are the steps for deployment.
   - ``` cd /path/to/this/repo/folder/ ```
   - ``` cd app/```
   - ``` npm i && npm run build```
-  - ``` cd ..``
+  - ``` cd ..```
   - ``` sudo cp nginx-selfsigned.crt /etc/ssl/certs/ ```
   - ``` sudo cp nginx-selfsigned.key /etc/ssl/private/ ```
   - ``` sudo cp dhparam.pem /etc/ssl/certs/ ```
