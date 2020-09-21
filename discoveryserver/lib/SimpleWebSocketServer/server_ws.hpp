@@ -325,7 +325,7 @@ namespace SimpleWeb {
       long timeout_idle = 0;
       /// Maximum size of incoming messages. Defaults to architecture maximum.
       /// Exceeding this limit will result in a message_size error code and the connection will be closed.
-      std::size_t max_message_size = std::numeric_limits<std::size_t>::max();
+      std::size_t max_message_size = (std::numeric_limits<std::size_t>::max)();
       /// Additional header fields to send when performing WebSocket handshake.
       CaseInsensitiveMultimap header;
       /// IPv4 address in dotted decimal form or IPv6 address in hexadecimal notation.

@@ -1,0 +1,35 @@
+.add-person{
+    background: rgba(82, 82, 82, 0.9);
+  border-radius: 8px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  /* background-color: #edf4fa; */
+  
+}
+.plus{
+    font-family: Poppins;
+    font-size: 28px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #edf4fa;
+    opacity: 1;
+    background: none;
+    
+}
+.add-person-text{
+    font-family: Axiforma;
+    font-size: 18px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.83;
+    letter-spacing: normal;
+    text-align: left;
+    color: #edf4fa;
+    opacity: 1;
+    z-index: 200px;
+}

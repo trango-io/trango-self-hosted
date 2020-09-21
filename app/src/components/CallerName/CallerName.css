@@ -1,0 +1,16 @@
+.caller-name{
+    border-radius: 8px;
+  border: solid 1px #b2b2b2;
+  background-color: #edf4fa;
+}
+.name{
+  font-family: Axiforma;
+  font-size: 18px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.83;
+  letter-spacing: normal;
+  text-align: left;
+  color: #1d2731;
+}

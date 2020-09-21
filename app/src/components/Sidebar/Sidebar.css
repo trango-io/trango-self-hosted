@@ -1,0 +1,36 @@
+.Sidebar{
+    height: 100vh;
+
+    width: 87px;
+    position: absolute;
+    z-index: 1322;
+    background: #1d2731;
+    opacity: 0.7;
+}
+.settings-icon{
+    position: fixed;
+    bottom: 2%;
+
+    left: 1%;
+
+}
+.info-icon{
+    position: fixed;
+    bottom: 14%;
+    left: 1%;
+}
+.sidebar-lower-section{
+    position: fixed;
+    bottom: 0%;
+    left: 1%;
+}
+@media(max-width:4027px){
+    .sidebar-lower-section{
+        left: 1%;
+    } 
+}
+@media(max-width:2448px){
+    .sidebar-lower-section{
+        left: 2%;
+    }    
+}

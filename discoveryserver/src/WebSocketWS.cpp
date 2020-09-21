@@ -1,6 +1,5 @@
 #include "WebSocketWS.h"
 
-
 WsServer WebSocketWS::server;
 
 WebSocketWS::WebSocketWS () {
@@ -13,7 +12,7 @@ WebSocketWS::~WebSocketWS () {
 void WebSocketWS::StartServerWS(uint32_t nPort, string sEndURL) {
   server.config.port = nPort;
   server.config.address = "0.0.0.0";
-  server.config.thread_pool_size = 100;
+  server.config.thread_pool_size = 500;
 
   auto &echo = server.endpoint["^/"+ sEndURL + "/?$"];
 
@@ -34,6 +33,19 @@ void WebSocketWS::StartServerWS(uint32_t nPort, string sEndURL) {
     OnError(connection, ec.message());
   };
 
+  echo.on_handshake = [](shared_ptr<WsServer::Connection> connection, SimpleWeb::CaseInsensitiveMultimap &) {
+    // auto origin = connection->header.find("Origin");
+    // if(origin != connection->header.end()) {
+    //   if (origin->second == "https://web.trango.io" || origin->second == "https://prjcomm.trango.io") {
+    //     return SimpleWeb::StatusCode::information_switching_protocols;
+    //   } else {
+    //     return SimpleWeb::StatusCode::client_error_unauthorized;
+    //   }
+    // } else {
+    //   return SimpleWeb::StatusCode::client_error_unauthorized;
+    // }
+    return SimpleWeb::StatusCode::information_switching_protocols;
+  };
 
   timer_start(std::bind(&WebSocketWS::NetworkDetection, this), 28000);
   timer_start(std::bind(&WebSocketWS::Pinging, this), 25000);
@@ -72,3 +84,4 @@ void WebSocketWS::Pinging() {
   }
 
 }
+

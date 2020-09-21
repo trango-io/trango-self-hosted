@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <g id="prefix__info" transform="translate(-358 -33)">
+        <g id="prefix__Ellipse_14" fill="none" stroke="#fff" stroke-width="1.5px" data-name="Ellipse 14" transform="translate(358 33)">
+            <circle cx="12" cy="12" r="12" stroke="none"/>
+            <circle cx="12" cy="12" r="11.25"/>
+        </g>
+        <text id="prefix__i" fill="#fff" font-family="Poppins-SemiBold, Poppins" font-size="14px" font-weight="600" transform="translate(368 50)">
+            <tspan x="0" y="0">i</tspan>
+        </text>
+    </g>
+</svg>

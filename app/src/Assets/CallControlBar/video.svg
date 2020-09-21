@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25.449" height="16.36" viewBox="0 0 25.449 16.36">
+    <defs>
+        <style>
+            .prefix__cls-1{fill:#fff}
+        </style>
+    </defs>
+    <g id="prefix__video">
+        <g id="prefix__Group_171" data-name="Group 171">
+            <g id="prefix__Group_170" data-name="Group 170">
+                <path id="prefix__Path_67" d="M25.018 87.286a.909.909 0 0 0-.884-.04l-5.956 2.978V88.06a2.727 2.727 0 0 0-2.727-2.727H2.727A2.727 2.727 0 0 0 0 88.06v10.906a2.727 2.727 0 0 0 2.727 2.727h12.724a2.727 2.727 0 0 0 2.727-2.727V96.8l5.956 2.983a.909.909 0 0 0 1.315-.818V88.06a.909.909 0 0 0-.431-.774zm-8.658 11.68a.909.909 0 0 1-.909.909H2.727a.909.909 0 0 1-.909-.909V88.06a.909.909 0 0 1 .909-.909h12.724a.909.909 0 0 1 .909.909zm7.271-1.466l-5.453-2.727v-2.516l5.453-2.727z" class="prefix__cls-1" data-name="Path 67" transform="translate(0 -85.333)"/>
+            </g>
+        </g>
+        <g id="prefix__Group_173" data-name="Group 173" transform="translate(5.453 4.544)">
+            <g id="prefix__Group_172" data-name="Group 172">
+                <path id="prefix__Path_68" d="M106.036 170.667a3.636 3.636 0 1 0 3.636 3.636 3.636 3.636 0 0 0-3.636-3.636zm0 5.453a1.818 1.818 0 1 1 1.818-1.818 1.818 1.818 0 0 1-1.818 1.818z" class="prefix__cls-1" data-name="Path 68" transform="translate(-102.4 -170.667)"/>
+            </g>
+        </g>
+    </g>
+</svg>

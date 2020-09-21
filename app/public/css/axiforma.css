@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'Axiforma';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Italic.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: normal;
+    font-weight: 250;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Thin.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: italic;
+    font-weight: 250;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Thin Italic.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Book.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Light.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: italic;
+    font-weight: 300;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Book Italic.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: italic;
+    font-weight: 300;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Light Italic.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Medium.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: italic;
+    font-weight: 500;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Medium Italic.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma SemiBold.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: italic;
+    font-weight: 600;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma SemiBold Italic.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: italic;
+    font-weight: 700;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Bold Italic.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: normal;
+    font-weight: 800;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma ExtraBold.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: italic;
+    font-weight: 800;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma ExtraBold Italic.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: normal;
+    font-weight: 900;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Black.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: italic;
+    font-weight: 900;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Black Italic.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: normal;
+    font-weight: 950;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Heavy.woff') format('woff');
+}
+@font-face {
+    font-family: 'Axiforma';
+    font-style: italic;
+    font-weight: 950;
+    src: local('Axiforma'), url('https://fonts.cdnfonts.com/s/28727/Kastelov  Axiforma Heavy Italic.woff') format('woff');
+}
+
+

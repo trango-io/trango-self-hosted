@@ -96,6 +96,7 @@ namespace SimpleWeb {
                     return;
                   if(!ec) {
                     connection->set_timeout(this->config.timeout_request);
+                    connection->in_message = std::shared_ptr<InMessage>(new InMessage());
                     asio::async_read_until(connection->socket->next_layer(), connection->in_message->streambuf, "\r\n\r\n", [this, connection](const error_code &ec, std::size_t /*bytes_transferred*/) {
                       connection->cancel_timeout();
                       auto lock = connection->handler_runner->continue_lock();

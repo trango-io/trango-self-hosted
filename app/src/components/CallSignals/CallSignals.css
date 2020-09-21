@@ -1,0 +1,156 @@
+#signals-call {
+    /* position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    overflow: hidden;
+    width: 100%;
+    height: 100%; */
+    position: relative;
+    top: 50%;
+    bottom: 0;
+}
+#signals-call span {
+    display: block;
+    position: absolute;
+    left: 50%;
+    opacity: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 80px rgba(32, 191, 255, 0.5);
+    -webkit-animation: signal 2s infinite alternate ease-in-out;
+    -moz-animation: signal 2s infinite alternate ease-in-out;
+    -ms-animation: signal 2s infinite alternate ease-in-out;
+    -o-animation: signal 2s infinite alternate ease-in-out;
+    animation: signal 2s infinite alternate ease-in-out;
+}
+
+#signals-call span.s1,
+#signals-call span.s2,
+#signals-call span.s3,
+#signals-call span.s4,
+#signals-call span.s5,
+#signals-call span.s6,
+#signals-call span.s7 {
+    border: 2px solid #74bbdc;
+    border-color: rgba(116, 187, 220, .3);
+    box-shadow: 0 0 80px rgba(32, 191, 255, .3);
+}
+
+
+#signals-call span.s1 {
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    -webkit-animation-delay: .3s;
+    -moz-animation-delay: .3s;
+    -ms-animation-delay: .3s;
+    -o-animation-delay: .3s;
+    animation-delay: .3s;
+}
+
+
+#signals-call span.s2 {
+    width: 300px;
+    height: 300px;
+    margin-top: -150px;
+    margin-left: -150px;
+    -webkit-animation-delay: .6s;
+    -moz-animation-delay: .6s;
+    -ms-animation-delay: .6s;
+    -o-animation-delay: .6s;
+    animation-delay: .6s;
+}
+
+
+#signals-call span.s3 {
+    width: 500px;
+    height: 500px;
+    margin-top: -250px;
+    margin-left: -250px;
+    -webkit-animation-delay: .9s;
+    -moz-animation-delay: .9s;
+    -ms-animation-delay: .9s;
+    -o-animation-delay: .9s;
+    animation-delay: .9s;
+}
+
+
+#signals-call span.s4 {
+    width: 700px;
+    height: 700px;
+    margin-top: -350px;
+    margin-left: -350px;
+    -webkit-animation-delay: 1.2s;
+    -moz-animation-delay: 1.2s;
+    -ms-animation-delay: 1.2s;
+    -o-animation-delay: 1.2s;
+    animation-delay: 1.2s;
+}
+
+
+#signals-call span.s5 {
+    width: 900px;
+    height: 900px;
+    margin-top: -450px;
+    margin-left: -450px;
+    -webkit-animation-delay: 1.5s;
+    -moz-animation-delay: 1.5s;
+    -ms-animation-delay: 1.5s;
+    -o-animation-delay: 1.5s;
+    animation-delay: 1.5s;
+    animation-direction: reverse;
+}
+
+
+#signals-call span.s6 {
+    width: 1100px;
+    height: 1100px;
+    margin-top: -550px;
+    margin-left: -550px;
+    -webkit-animation-delay: 1.8s;
+    -moz-animation-delay: 1.8s;
+    -ms-animation-delay: 1.8s;
+    -o-animation-delay: 1.8s;
+    animation-delay: 1.8s;
+}
+
+
+#signals-call span.s7 {
+    width: 1300px;
+    height: 1300px;
+    margin-top: -650px;
+    margin-left: -650px;
+    -webkit-animation-delay: 2.1s;
+    -moz-animation-delay: 2.1s;
+    -ms-animation-delay: 2.1s;
+    -o-animation-delay: 2.1s;
+    animation-delay: 2.1s;
+}
+
+
+#signals-call span.s8 {
+    width: 1500px;
+    height: 1500px;
+    margin-top: -750px;
+    margin-left: -750px;
+    -webkit-animation-delay: 2.1s;
+    -moz-animation-delay: 2.1s;
+    -ms-animation-delay: 2.1s;
+    -o-animation-delay: 2.1s;
+    animation-delay: 2.1s;
+}
+
+
+#signals-call span.s9 {
+    width: 1700px;
+    height: 1700px;
+    margin-top: -850px;
+    margin-left: -850px;
+    -webkit-animation-delay: 2.1s;
+    -moz-animation-delay: 2.1s;
+    -ms-animation-delay: 2.1s;
+    -o-animation-delay: 2.1s;
+    animation-delay: 2.1s;
+}

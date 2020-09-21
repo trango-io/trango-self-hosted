@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34.796" height="28.612" viewBox="0 0 34.796 28.612">
+    <defs>
+        <style>
+            .prefix__cls-1{fill:#1896de}
+        </style>
+    </defs>
+    <g id="prefix__link" transform="translate(.001 -42.421)">
+        <g id="prefix__Group_178" data-name="Group 178" transform="translate(13.327 42.421)">
+            <g id="prefix__Group_177" data-name="Group 177">
+                <path id="prefix__Path_69" d="M202.415 44.332a6.521 6.521 0 0 0-4.615-1.912 6.486 6.486 0 0 0-4.611 1.909l-8.424 8.424a6.532 6.532 0 0 0-1.667 6.379 1.244 1.244 0 0 0 2.395-.675 4.044 4.044 0 0 1 1.031-3.945l8.424-8.423a4.033 4.033 0 0 1 5.7 5.7l-8.424 8.424a4.02 4.02 0 0 1-2.018 1.093 1.244 1.244 0 0 0 .257 2.462 1.23 1.23 0 0 0 .259-.027 6.5 6.5 0 0 0 3.26-1.769l8.424-8.423a6.521 6.521 0 0 0 .009-9.217z" class="prefix__cls-1" data-name="Path 69" transform="translate(-182.855 -42.421)"/>
+            </g>
+        </g>
+        <g id="prefix__Group_180" data-name="Group 180" transform="translate(-.001 49.712)">
+            <g id="prefix__Group_179" data-name="Group 179">
+                <path id="prefix__Path_70" d="M21.188 147.094a1.244 1.244 0 1 0-2.395.675 4.044 4.044 0 0 1-1.031 3.945l-8.424 8.424a4.033 4.033 0 0 1-5.7-5.7l8.424-8.425a4.015 4.015 0 0 1 2.015-1.093 1.244 1.244 0 1 0-.488-2.44l-.025.005a6.512 6.512 0 0 0-3.262 1.769l-8.424 8.424A6.522 6.522 0 0 0 11.1 161.9l8.424-8.425a6.532 6.532 0 0 0 1.664-6.381z" class="prefix__cls-1" data-name="Path 70" transform="translate(.001 -142.452)"/>
+            </g>
+        </g>
+    </g>
+</svg>
