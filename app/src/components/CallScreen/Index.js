@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import "../Dashboard/Dashboard.css";
-import CallSignals from "../CallSignals/CallSignals";
 import { Avatar } from "@material-ui/core";
 import Add from "../../Assets/CallControlBar/add.svg";
-import Message from "../../Assets/CallControlBar/message.svg";
 import Mic from "../../Assets/CallControlBar/mic.svg";
 import Video from "../../Assets/CallControlBar/video.svg";
 import Phone from "../../Assets/CallControlBar/phoneRed.svg";
 import Copy from "../../Assets/CallControlBar/copy (1).svg";
 import Link from "../../Assets/CallControlBar/link.svg";
-
-import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
@@ -19,10 +15,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import Typography from "@material-ui/core/Typography";
-import { blue } from "@material-ui/core/colors";
 import Bowser from "bowser";
-
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { store } from 'react-notifications-component';
@@ -133,7 +126,7 @@ changeEvent = e => {
 
 handleKeyPress = (target) => {
   
-  if(target.charCode==13){
+  if(target.charCode === 13){
     if(target.target.value.length > 0){
       localStorage.setItem('myName', target.target.value)
       this.props.changeName(target.target.value)
@@ -194,7 +187,7 @@ handleKeyPress = (target) => {
               Contacts
               <span className="float-right" onClick={this.showSearchBar}>
                 <img src={Close} className="img-fluid px-2" 
-                          style={{filter: "invert(100%) sepia(70%) saturate(2358%) hue-rotate(346deg) contrast(10%)"}} />
+                          style={{filter: "invert(100%) sepia(70%) saturate(2358%) hue-rotate(346deg) contrast(10%)"}} alt="close" />
               </span>
               <div className='input-group pt-2' >
                 <input className='form-control form-control-sm ' style={{background:'white',borderColor:'#bdbdbd', borderWidth: "1px", borderStyle: "solid" }} placeholder='Search' value={this.state.searchValue} onChange={(e)=>{this.searchHandler(e)}}/>
@@ -216,12 +209,12 @@ handleKeyPress = (target) => {
                     <ListItemText>
                       <span className="float-left">{item.name}</span>
                       <span className="float-right">
-                        <img onClick={() => {
+                        <img alt="Audio" onClick={() => {
                             this.props.subMenu("AudioPeer", item.email);
                           }} 
                           src={PhoneCall} className="img-fluid px-2" 
                           style={{filter: "invert(100%) sepia(70%) saturate(2358%) hue-rotate(346deg) contrast(10%)"}} />
-                          <img onClick={() => {
+                          <img alt="Audio" onClick={() => {
                             this.props.subMenu("AudioPeer", item.email);
                           }} 
                           src={VideoCall} className="img-fluid px-2" 
@@ -239,12 +232,12 @@ handleKeyPress = (target) => {
                     <ListItemText>
                       <span className="float-left">{item.name}</span>
                       <span className="float-right">
-                      <img onClick={() => {
+                      <img alt="Audio" onClick={() => {
                             this.props.subMenu("AudioPeer", item.email);
                           }} 
                           src={PhoneCall} className="img-fluid px-2" 
                           style={{filter: "invert(100%) sepia(70%) saturate(2358%) hue-rotate(346deg) contrast(10%)"}} />
-                        <img onClick={() => {
+                        <img alt="Audio" onClick={() => {
                             this.props.subMenu("AudioPeer", item.email);
                           }} 
                           src={VideoCall} className="img-fluid px-2" 
@@ -262,9 +255,9 @@ handleKeyPress = (target) => {
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description">
             <DialogTitle  id="alert-dialog-title" className='copy-dialog'>
-              <img src={Link}/>
+              <img src={Link} alt="copylink" />
               <span className='float-right' onClick={this.copyLinkHandler}>
-              <img src={Close} className="img-fluid px-2" 
+              <img src={Close} className="img-fluid px-2" alt="close"
                           style={{filter: "invert(100%) sepia(70%) saturate(2358%) hue-rotate(346deg) contrast(10%)"}} />
               </span>
 
@@ -277,7 +270,7 @@ handleKeyPress = (target) => {
                   <div className='link-spn-text float-left'>
                   {window.location.href}roomlink?roomid={this.props.roomId}
                   </div>
-                  <div className='float-right' onClick={() => {this.copyUrl()}}><img src={Copy}/></div>
+                  <div className='float-right' onClick={() => {this.copyUrl()}}><img src={Copy} alt="Copy" /></div>
                   </div>
                   
                 </DialogContentText>
@@ -298,7 +291,7 @@ handleKeyPress = (target) => {
                       <video id="selfVideo" style={{objectFit: "cover"}}></video>
                   <div class="overlay">
                   { !this.state.isInput ? <span onClick={() => {this.setState({isInput: true})}} id="setMyName">{localStorage.getItem('myName') ? localStorage.getItem('myName') :  this.state.myName}</span> : ''}
-                  { !this.state.isInput ? <img src={Pencil} className="img-fluid px-2 pencil-icon-call" /> : ''}
+                  { !this.state.isInput ? <img src={Pencil} alt="Pencil" className="img-fluid px-2 pencil-icon-call" /> : ''}
                   { this.state.isInput ? <input type="text" autoFocus className= "set-myname" placeholder="Enter Name" maxLength="7" onBlur={this.changeEvent} onKeyPress={this.handleKeyPress} /> : ''}
                 </div>
                     </div>
@@ -322,10 +315,10 @@ handleKeyPress = (target) => {
                     data-placement="top"
                     title="Mute"
                   >
-                    {this.props.isMute ? (
-                      <img src={Mic} className="img-fluid mic-off" />
+                    {!this.props.isMute ? (
+                      <img src={Mic} className="img-fluid mic-off" alt="Mic" />
                     ) : (
-                      <img src={Mic} className="img-fluid" />
+                      <img src={Mic} className="img-fluid" alt="Mic" />
                     )}
                   </a>
                 </div>
@@ -340,9 +333,9 @@ handleKeyPress = (target) => {
                     title="Camera On/Off"
                   >
                     {!this.props.isVideo ? (
-                      <img src={Video} className="img-fluid cam-off" />
+                      <img src={Video} className="img-fluid cam-off" alt="Video"/>
                     ) : (
-                      <img src={Video} className="img-fluid" />
+                      <img src={Video} className="img-fluid" alt="Video" />
                     )}
                   </a>
                 </div>
@@ -361,11 +354,8 @@ handleKeyPress = (target) => {
                 </div>
                 <div className="col" onClick={this.showSearchBar}>
                 <Tooltip open={this.state.openTooltip} title="Add another person" leaveDelay={200}>
-                  <img src={Add} className="img-fluid"  />
+                  <img src={Add} className="img-fluid" alt="Add" />
                 </Tooltip>
-                </div>
-                <div className="col" onClick={this.copyLinkHandler}>
-                  <img src={Copy} className="img-fluid" />
                 </div>
               </div>
             </div>

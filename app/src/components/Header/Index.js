@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import "./Header.css";
 import { Navbar, NavbarBrand, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import uuid from "react-uuid";
-import { Tooltip } from "@material-ui/core";
 import SearchIcon from "../../Assets/Header/search.svg";
 import TrangoLogo from "../../Assets/Logo/TrangoLogo.png";
 
@@ -119,7 +116,7 @@ export default class Header extends Component {
               </div>
             ) : (
               <div onClick={this.showSearchbarHandler} className="mr-4 mt-3 ">
-                <img src={SearchIcon} className="coloring" height="20px" />
+                <img src={SearchIcon} className="coloring" height="20px" alt="search" />
               </div>
             )}
           </Nav>

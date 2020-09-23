@@ -3,12 +3,8 @@ import "./Sidebar.css";
 import logo_s from "../../Assets/Sidebar/logoIcon.png";
 import logo_m from "../../Assets/Sidebar/logoIcon@2x.png";
 import logo_l from "../../Assets/Sidebar/logoIcon@3x.png";
-import settings from "../../Assets/Sidebar/settings.svg";
 import info from "../../Assets/Sidebar/info.svg";
-import { Link } from "react-router-dom";
 import { Dialog, DialogTitle } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
-import Image from "../../Assets/Header/1.jpg";
 
 export default class Sidebar extends Component {
   constructor() {

@@ -117,7 +117,7 @@ export default class Home extends Component {
   };
 
   handleKeyPress = target => {
-    if (target.charCode == 13) {
+    if (target.charCode === 13) {
       localStorage.setItem("myName", target.target.value);
       this.props.changeName(target.target.value);
       this.setState({ isInput: false });
@@ -319,7 +319,7 @@ export default class Home extends Component {
                     {localStorage.getItem("myName")
                       ? localStorage.getItem("myName")
                       : this.state.myName}{" "}
-                    <img src={Pencil} className="img-fluid px-2 pencil-icon" />
+                    <img src={Pencil} className="img-fluid px-2 pencil-icon" alt="Edit" />
                   </span>
                 ) : (
                   ""

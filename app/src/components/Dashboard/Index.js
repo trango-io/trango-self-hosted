@@ -24,7 +24,6 @@ var int;
 var ws = null;
 let reconnectInterval = null;
 var result = Bowser.getParser(window.navigator.userAgent);
-var url = window.location.href;
 var from = uuid();
 var fakerIp = faker.internet.ip();
 var thisName = localStorage.getItem("myName")
@@ -71,9 +70,9 @@ export default class Dashboard extends Component {
       callType: "",
       showSearchbar: false,
       isBusy: false,
-      isVideo: false,
+      isVideo: true,
       remoteVideo: false,
-      isMute: false,
+      isMute: true,
       devices: [],
       file: [],
       fileAccept: false,
@@ -139,7 +138,7 @@ export default class Dashboard extends Component {
           }
         }
         if (data.type === "samenetwork") {
-          const dataSet = [...new Set(data.devices)];
+          // const dataSet = [...new Set(data.devices)];
           this.setState({
             devices: data.devices
           });
@@ -196,8 +195,10 @@ export default class Dashboard extends Component {
             () => {
               if (this.state.callType.toLowerCase() === "audio") {
                 console.log("AudioCallRequest");
+                this.state.callType.toLowerCase() === "audio" && this.setState({isVideo: false})
               } else {
                 console.log("VideoCallRequest");
+                this.state.callType.toLowerCase() === "video" && this.setState({isVideo: true})
               }
               this.callRinger();
             }
@@ -521,6 +522,7 @@ export default class Dashboard extends Component {
 
   subMenu = (e, f, g) => {
     if (e.toLowerCase() === "audio" || e.toLowerCase() === "video") {
+      e.toLowerCase() === "audio" && this.setState({isVideo: false})
       if (localStream === null) {
         navigator.mediaDevices
           .getUserMedia({ video: true, audio: { echoCancellation: true } })
@@ -798,7 +800,6 @@ export default class Dashboard extends Component {
         canvas.classList.add("round");
         video.setAttribute("playsinline", "");
         video.autoplay = true;
-        var span = document.createElement("span");
         container.appendChild(video);
         container.appendChild(nameDiv);
         avatarDiv.appendChild(canvas);
@@ -818,7 +819,7 @@ export default class Dashboard extends Component {
         };
 
         outerContainer.appendChild(container);
-        if ($(".w-100").prevAll(".col").length == 1) {
+        if ($(".w-100").prevAll(".col").length === 1) {
           $(outerContainer).insertBefore(".w-100");
         } else {
           remotes.appendChild(outerContainer);
@@ -830,7 +831,7 @@ export default class Dashboard extends Component {
           .getElementById("remotes")
           .getElementsByTagName("video").length;
 
-        if (remoteVideos == 2) {
+        if (remoteVideos === 2) {
           var spacer = document.createElement("div");
           spacer.className = "w-100";
           remotes.appendChild(spacer);
@@ -864,7 +865,7 @@ export default class Dashboard extends Component {
         .getElementsByTagName("video").length;
       var el = document.getElementById("container_" + e.peerid);
       if (remotes && el) {
-        if (remoteVideos == 3 || remoteVideos == 2) {
+        if (remoteVideos === 3 || remoteVideos === 2) {
           $(".w-100").remove();
           $(".videoContainer video").css("height", "100vh");
           $(".videoContainer .set-canvas").css("height", "100vh");
@@ -964,7 +965,7 @@ export default class Dashboard extends Component {
           })
         );
         if (e.fileSize !== 0 && e.fileName) {
-          if (receivedSize == e.fileSize) {
+          if (receivedSize === e.fileSize) {
             const received = new Blob(receiveBuffer);
             receiveBuffer = [];
             this.setState({ fileAccept: true });
@@ -992,7 +993,7 @@ export default class Dashboard extends Component {
           if (this.isJSON(data)) {
             var sData = JSON.parse(data);
 
-            if (sData.type == "progress") {
+            if (sData.type === "progress") {
               this.setProgress(sData.value, e.from);
             }
           }
@@ -1059,17 +1060,13 @@ export default class Dashboard extends Component {
       });
       this.closing();
     } else if (e === "Mute") {
-      this.state.isMute
-        ? this.setState({ isMute: false })
-        : this.setState({ isMute: true });
+         this.setState({ isMute: !this.state.isMute })
       localStream.getAudioTracks()[0].enabled = !localStream.getAudioTracks()[0]
         .enabled;
     } else if (e === "Camera") {
       localStream.getVideoTracks()[0].enabled = !localStream.getVideoTracks()[0]
         .enabled;
-      this.state.isVideo
-        ? this.setState({ isVideo: false })
-        : this.setState({ isVideo: true });
+         this.setState({ isVideo: !this.state.isVideo })
       this.sendMessage({ type: "video" });
       const video = document.getElementById("selfVideo");
       video.volume = 0;
@@ -1128,7 +1125,6 @@ export default class Dashboard extends Component {
     const chunkSize = 64000;
     var fileReader = new FileReader();
     let offset = 0;
-    let percentage = 0;
 
     sendBuffer = [];
     webRTCPaused = false;
