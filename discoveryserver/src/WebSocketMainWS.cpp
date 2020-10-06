@@ -161,6 +161,8 @@ bool WebSocketMainWS::RegisterPeer(shared_ptr<WsServer::Connection> hConnection,
                         if (!pData->m_roomID.empty()) {
                             PartRoom(pData->m_hConnection);
                         }
+                        SendPeersInfo(pData, "delpeer");
+                        pData->m_hConnection->send_close(1006);
                         pthread_mutex_lock(&peerMapLock);
                         pData->m_hConnection = hConnection;
                         pData->m_name = data["name"].get<string>();
@@ -227,22 +229,27 @@ string WebSocketMainWS::FindPeerSameNetwork(shared_ptr<WsServer::Connection> hCo
         {"devices", json::array()}
     };
 
+    string peerID = hConnection->query_string;
 
-    unordered_map<string, PeerData*>::iterator itr;
-    for (itr = peerMap.begin(); itr != peerMap.end(); ++itr) { 
-        PeerData* pData = itr->second;
-        if (pData->m_hConnection.get() != hConnection.get()) {
-            json device;
-            device["email"] = pData->m_email;
-            device["name"] = pData->m_name;
-            device["privip"] = pData->m_privIP;
-            device["pubip"] = pData->m_pubIP;
-            device["devtype"] = pData->m_devType;
-            device["devname"] = pData->m_devName;
-            device["registered"] = pData->m_registered;
-            rNetworkPeers["devices"].insert(rNetworkPeers["devices"].end(), device);    
+    if (peerMap.find(peerID) != peerMap.end()) {
+        unordered_map<string, PeerData*>::iterator itr;
+        for (itr = peerMap.begin(); itr != peerMap.end(); ++itr) { 
+            PeerData* pData = itr->second;
+            if (pData->m_hConnection.get() != hConnection.get()) {
+                json device;
+                device["email"] = pData->m_email;
+                device["name"] = pData->m_name;
+                device["privip"] = pData->m_privIP;
+                device["pubip"] = pData->m_pubIP;
+                device["devtype"] = pData->m_devType;
+                device["devname"] = pData->m_devName;
+                device["registered"] = pData->m_registered;
+                rNetworkPeers["devices"].insert(rNetworkPeers["devices"].end(), device);    
+            }
         }
-    }  
+    } else {
+        hConnection->send_close(1006);
+    } 
     return rNetworkPeers.dump();
 }
 

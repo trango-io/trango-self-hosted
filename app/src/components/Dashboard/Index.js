@@ -965,7 +965,7 @@ export default class Dashboard extends Component {
           })
         );
         if (e.fileSize !== 0 && e.fileName) {
-          if (receivedSize === e.fileSize) {
+          if (receivedSize == e.fileSize) {
             const received = new Blob(receiveBuffer);
             receiveBuffer = [];
             this.setState({ fileAccept: true });
@@ -1122,7 +1122,7 @@ export default class Dashboard extends Component {
       );
       // TODO: Destroy local connection here
     }
-    const chunkSize = 64000;
+    const chunkSize = 32000;
     var fileReader = new FileReader();
     let offset = 0;
 
