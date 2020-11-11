@@ -1,5 +1,6 @@
 #include "WebSocketWS.h"
 
+WsServer WebSocketWS::server;
 
 WebSocketWS::WebSocketWS () {
 
@@ -9,11 +10,9 @@ WebSocketWS::~WebSocketWS () {
 }
 
 void WebSocketWS::StartServerWS(uint32_t nPort, string sEndURL) {
-  WsServer server;
   server.config.port = nPort;
   server.config.address = "0.0.0.0";
-  server.config.timeout_idle = 1200;
-  server.config.thread_pool_size = 100;
+  server.config.thread_pool_size = 500;
 
   auto &echo = server.endpoint["^/"+ sEndURL + "/?$"];
 
@@ -34,6 +33,22 @@ void WebSocketWS::StartServerWS(uint32_t nPort, string sEndURL) {
     OnError(connection, ec.message());
   };
 
+  echo.on_handshake = [](shared_ptr<WsServer::Connection> connection, SimpleWeb::CaseInsensitiveMultimap &) {
+    // auto origin = connection->header.find("Origin");
+    // if(origin != connection->header.end()) {
+    //   if (origin->second == "https://web.trango.io" || origin->second == "https://prjcomm.trango.io") {
+    //     return SimpleWeb::StatusCode::information_switching_protocols;
+    //   } else {
+    //     return SimpleWeb::StatusCode::client_error_unauthorized;
+    //   }
+    // } else {
+    //   return SimpleWeb::StatusCode::client_error_unauthorized;
+    // }
+    return SimpleWeb::StatusCode::information_switching_protocols;
+  };
+
+  timer_start(std::bind(&WebSocketWS::NetworkDetection, this), 28000);
+  timer_start(std::bind(&WebSocketWS::Pinging, this), 25000);
 
   server.start();
   
@@ -43,3 +58,30 @@ void WebSocketWS::StartServerWS(uint32_t nPort, string sEndURL) {
 void WebSocketWS::SendMessage(shared_ptr<WsServer::Connection> hConnection, string sMessage) {
   hConnection->send(sMessage);
 }
+
+void WebSocketWS::timer_start(std::function<void(void)> func, unsigned int interval)
+{
+  std::thread([func, interval]()
+  { 
+    while (true)
+    { 
+      auto x = std::chrono::steady_clock::now() + std::chrono::milliseconds(interval);
+      func();
+      std::this_thread::sleep_until(x);
+    }
+  }).detach();
+}
+
+void WebSocketWS::Pinging() {
+  for(auto &a_connection : server.get_connections()) {
+    string peerid = a_connection->query_string;
+    try {
+        json ping = {{"type", "ping"}, {"peerid", peerid}};
+        a_connection->send(ping.dump());
+    } catch (json::exception& e) {
+        continue;
+    } 
+  }
+
+}
+

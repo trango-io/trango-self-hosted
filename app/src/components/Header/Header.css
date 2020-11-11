@@ -1,0 +1,146 @@
+.header {
+  /* height: 82px;
+  flex:1;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 300; */
+  background: none !important;
+  box-shadow: none !important;
+}
+.navbar {
+  background: none !important;
+  box-shadow: none !important;
+}
+.text-white {
+  color: white;
+}
+.image-logo {
+  width: 128px;
+  height: 37px;
+  padding-left: 25px;
+  object-fit: contain;
+}
+.left {
+  float: left;
+}
+.inline {
+  display: inline;
+}
+.left-header {
+  display: flex;
+  align-items: center;
+}
+/* .scan-local-network{
+display: flex;
+justify-content: center;
+vertical-align: middle;
+margin-left: 3%;
+} */
+/* .scan-local-network p{
+margin: 0px;
+  width: 276px;
+  height: 39px;
+  font-family: Poppins;
+  font-size: 28px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff;
+} */
+.scan-local-network {
+  font-family: Poppins;
+  font-size: 28px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff !important;
+}
+.connected-to {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.56;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+.fa-wifi {
+  color: #1896de;
+}
+.hotel {
+  color: #1896de;
+}
+
+.apni-pasand {
+  padding-left: 90px;
+}
+.scan-local-network .scan-border {
+  border-bottom: 2px solid #1896de;
+}
+@media (max-width: 768px) {
+  .scan-border {
+    font-size: 16px !important;
+    display: none !important;
+  }
+  .local-network {
+    font-size: 16px !important;
+    display: none !important;
+  }
+  .apni-pasand {
+    padding-left: 5px;
+  }
+}
+.no-border-radius {
+  border-radius: 4px !important;
+  height: 40px;
+  width: 110px;
+  padding-right: 50px !important;
+  padding-left: 50px !important;
+}
+.header-logo {
+  /* max-width: 60%; */
+  height: auto;
+}
+.invite-call {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.56;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  padding-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .connected-to {
+    font-size: 12px;
+  }
+}
+.flaticon {
+  content: "\f18d";
+}
+.coloring {
+  filter: invert(100%);
+}
+.customization {
+  width: 170px !important;
+  height: 30px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}

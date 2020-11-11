@@ -1,6 +1,7 @@
 ## Description
 Trango self-hosted is a calling and file sharing solution that works over LAN (local area networks). It does not need to involve the internet for calling or file sharing. Ideal for offices, hotels, houses, restaurants, and any space where people use the same Public IP address or the same WiFi network. The package comes with a discovery server and a web app which can be deployed on the local machine and can be accessed from anywhere in the network.<br />
-Trango Web can be visited at https://web.trango.io . Please note that Trango is in beta.
+Trango Web can be visited at https://web.trango.io . Please note that Trango is in beta. <br />
+**Note** Opensource selfhosted version is now compatible with Mobile and Desktop Apps.
 
 The Following are the main features.
 - One to One and Group Audio/Video Calling.
@@ -14,19 +15,26 @@ The Following are the main features.
 The package can be deployed on a Linux machine also to provide more robust support a docker image is available on the docker hub.
 ### Linux Deployment
 #### Debian Prerequisites
-``` sudo apt update && sudo apt install -y libboost-all-dev libssl-dev g++ ```
+- ``` sudo apt update && sudo apt install -y libboost-all-dev libssl-dev g++ nginx python3.6 python3-pip curl``` <br />
+- ``` curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh && bash nodesource_setup.sh && apt install -y nodejs``` <br />
+- ``` pip3 install flask_restful flask_cors psutil```
 #### RHEL Prerequisites
-``` sudo yum -y update && sudo yum install -y boost boost-devel boost-system boost-filesystem boost-thread openssl-devel gcc-c++ ```
+- ``` sudo yum -y update && sudo yum install -y boost boost-devel boost-system boost-filesystem boost-thread openssl-devel gcc-c++ nginx python3.6 python3-pip curl``` <br />
+- ``` curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh && bash nodesource_setup.sh && yum install -y nodejs``` <br />
+- ``` pip3 install flask_restful flask_cors psutil```
 #### Deployment
 The Following are the steps for deployment.
 - Clone or download this repo into your system.
 - On Terminal run the following commands.
   - ``` cd /path/to/this/repo/folder/ ```
+  - ``` cd app/```
+  - ``` npm i && npm run build```
+  - ``` cd ..```
   - ``` sudo cp nginx-selfsigned.crt /etc/ssl/certs/ ```
   - ``` sudo cp nginx-selfsigned.key /etc/ssl/private/ ```
   - ``` sudo cp dhparam.pem /etc/ssl/certs/ ```
   - ``` sudo cp ssl.conf /etc/nginx/conf.d/ ```
-  - Edit ssl.conf file and change **root /home/app/** to **root /path/to/app/folder**.
+  - Edit ssl.conf file and change **root /home/app/** to **root /path/to/build/folder/in/app/folder**.
   - ``` sudo cp default /etc/nginx/sites-available/ ```
   - ``` sudo service nginx restart ```
   - ``` sudo cd discoveryserver/src/ ```
