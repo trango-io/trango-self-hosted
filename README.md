@@ -29,6 +29,7 @@ The Following are the steps for deployment.
   - ``` cd /path/to/this/repo/folder/ ```
   - ``` cd app/```
   - ``` npm i && npm run build```
+  - ``` python3 api.py &```
   - ``` cd ..```
   - ``` sudo cp nginx-selfsigned.crt /etc/ssl/certs/ ```
   - ``` sudo cp nginx-selfsigned.key /etc/ssl/private/ ```
